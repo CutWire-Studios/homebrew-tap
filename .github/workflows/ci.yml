@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-14
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+
+      - name: Cache Homebrew Bundler RubyGems
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+
+      - name: Checkout tap
+        uses: actions/checkout@v4
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.repository-path }}
+
+      - name: Run brew test-bot --only-tap-syntax
+        run: brew test-bot --only-tap-syntax
+
+      - name: Run brew audit
+        run: brew audit --cask --online --tap=${{ steps.set-up-homebrew.outputs.tap-name }}
+
+      - name: Test Cask Installation
+        run: |
+          brew install --cask --verbose ${{ steps.set-up-homebrew.outputs.tap-name }}/drift
+          brew uninstall --cask --verbose --zap drift
