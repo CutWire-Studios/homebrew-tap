@@ -13,7 +13,7 @@ cask "drift" do
   end
 
   depends_on arch: :arm64
-  depends_on :macos
+  depends_on macos: :monterey
 
   app "Drift.app"
 
