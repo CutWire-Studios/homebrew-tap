@@ -17,6 +17,12 @@ cask "drift" do
 
   app "Drift.app"
 
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:         ["-dr", "com.apple.quarantine", "/Applications/Drift.app"],
+        must_succeed: false
+  end
+
   zap trash: [
     "~/Library/Application Support/CutWire Drift",
     "~/Library/Preferences/com.cutwire-drift.CutWire Drift.plist",
@@ -24,7 +30,8 @@ cask "drift" do
   ]
 
   caveats <<~EOS
-    Drift is not notarized by Apple. If macOS prevents opening it, run:
+    Drift is not notarized by Apple. The quarantine attribute is automatically
+    removed during installation. If macOS still prevents opening it, run:
       xattr -dr com.apple.quarantine #{appdir}/Drift.app
   EOS
 end
