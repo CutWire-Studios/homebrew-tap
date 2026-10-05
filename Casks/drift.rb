@@ -17,6 +17,12 @@ cask "drift" do
 
   app "Drift.app"
 
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args:         ["-dr", "com.apple.quarantine", "#{appdir}/Drift.app"],
+                   must_succeed: false
+  end
+
   zap trash: [
     "~/Library/Application Support/CutWire Drift",
     "~/Library/Preferences/com.cutwire-drift.CutWire Drift.plist",
