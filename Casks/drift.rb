@@ -30,7 +30,8 @@ cask "drift" do
   ]
 
   caveats <<~EOS
-    Drift is not notarized by Apple. If macOS prevents opening it, run:
+    Drift is not notarized by Apple. The quarantine attribute is automatically
+    removed during installation. If macOS still prevents opening it, run:
       xattr -dr com.apple.quarantine #{appdir}/Drift.app
   EOS
 end
