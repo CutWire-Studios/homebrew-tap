@@ -17,10 +17,10 @@ cask "drift" do
 
   app "Drift.app"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args:         ["-dr", "com.apple.quarantine", "#{appdir}/Drift.app"],
-                   must_succeed: false
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:         ["-dr", "com.apple.quarantine", "/Applications/Drift.app"],
+        must_succeed: false
   end
 
   zap trash: [
