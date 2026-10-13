@@ -1,6 +1,6 @@
 cask "drift" do
-  version "0.7.5"
-  sha256 "e5d34fc4d5b7c6ea3173c0addec8d0cb43fc80087b1d7313fdaffc91434ce2a8"
+  version "0.8.0"
+  sha256 "42ffe84853af9b7aa77a6d552a7943ac4294ddf3db5896651934399d3cfb4e51"
 
   url "https://github.com/CutWire-Studios/Drift/releases/download/v#{version}/Drift-#{version}-arm64.dmg"
   name "Drift"
