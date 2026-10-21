@@ -1,8 +1,11 @@
 cask "drift" do
-  version "0.8.0"
-  sha256 "42ffe84853af9b7aa77a6d552a7943ac4294ddf3db5896651934399d3cfb4e51"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/CutWire-Studios/Drift/releases/download/v#{version}/Drift-#{version}-arm64.dmg"
+  version "0.8.0"
+  sha256 arm:   "42ffe84853af9b7aa77a6d552a7943ac4294ddf3db5896651934399d3cfb4e51",
+         intel: "0000000000000000000000000000000000000000000000000000000000000000"
+
+  url "https://github.com/CutWire-Studios/Drift/releases/download/v#{version}/Drift-#{version}-#{arch}.dmg"
   name "Drift"
   desc "Desktop video editor"
   homepage "https://github.com/CutWire-Studios/Drift"
